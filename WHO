@@ -1,0 +1,11 @@
+who <- WHO
+str(who)
+plot(who$GNI,who$FertilityRate)
+library(ggplot2)
+scat <- ggplot(who,aes(x=GNI,y=FertilityRate))
+scat+geom_point()
+fertGNI <- scat+geom_point(color="darkblue",size=3,shape=17)+ggtitle("Fertility Rate vs GNI")
+pdf("myplot.pdf")
+print(fertGNI)
+dev.off()
+colors()
