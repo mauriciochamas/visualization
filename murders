@@ -1,0 +1,13 @@
+mur <- murders
+str(mur)
+statesMap <- map_data("state")
+str(statesMap)
+ggplot(statesMap,aes(x=long,y=lat,group=group))+geom_polygon(fill="white",color="red")
+mur$region <- tolower(murders$State)
+murMap <- merge(statesMap,mur,by="region")
+str(murMap)
+ggplot(murMap,aes(x=long,y=lat,group=group,fill=Murders))+geom_polygon(color="black")+scale_fill_gradient(low="blue",high = "red",guide = "legend")
+ggplot(murMap,aes(x=long,y=lat,group=group,fill=Population))+geom_polygon(color="black")+scale_fill_gradient(low="blue",high = "red",guide = "legend")
+ggplot(murMap,aes(x=long,y=lat,group=group,fill=Population))+geom_polygon(color="black")+scale_fill_gradient(low="blue",high = "red",guide = "legend")
+murMap$Murderate <- murMap$Murders/murMap$Population*100000
+ggplot(murMap,aes(x=long,y=lat,group=group,fill=Murderate))+geom_polygon(color="black")+scale_fill_gradient(low="yellow",high = "red",guide = "legend",limits=c(0,10))
