@@ -1,0 +1,9 @@
+int <- intl
+library(ggplot2)
+str(int)
+ggplot(int,aes(x=Region,y=PercentOfIntl))+geom_bar(stat="identity")+geom_text(aes(label=PercentOfIntl))
+ggplot(int,aes(x=Region,y=PercentOfIntl))+geom_bar(stat="identity")+geom_text(aes(label=PercentOfIntl))
+int <- transform(int,Region=reorder(Region,-PercentOfIntl))
+int$PercentOfIntl <- int$PercentOfIntl*100
+ggplot(int,aes(x=Region,y=PercentOfIntl))+geom_bar(stat="identity",fill="dark blue")+ geom_text(aes(label=PercentOfIntl),vjust=-0.4)+ ylab("Porcentaje de Estudiantes")+theme(axis.title.x=element_blank(),axis.text.x=element_text(angle = 45,hjust = 1))
+library(ggmap)
