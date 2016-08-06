@@ -11,3 +11,4 @@ ggplot(murMap,aes(x=long,y=lat,group=group,fill=Population))+geom_polygon(color=
 ggplot(murMap,aes(x=long,y=lat,group=group,fill=Population))+geom_polygon(color="black")+scale_fill_gradient(low="blue",high = "red",guide = "legend")
 murMap$Murderate <- murMap$Murders/murMap$Population*100000
 ggplot(murMap,aes(x=long,y=lat,group=group,fill=Murderate))+geom_polygon(color="black")+scale_fill_gradient(low="yellow",high = "red",guide = "legend",limits=c(0,10))
+ggplot(murMap,aes(x=long,y=lat,group=group,fill=GunOwnership))+geom_polygon(color="black")+scale_fill_gradient(low="white",high = "red",guide = "legend")
