@@ -1,0 +1,29 @@
+int <- intl
+library(ggplot2)
+str(int)
+ggplot(int,aes(x=Region,y=PercentOfIntl))+geom_bar(stat="identity")+geom_text(aes(label=PercentOfIntl))
+ggplot(int,aes(x=Region,y=PercentOfIntl))+geom_bar(stat="identity")+geom_text(aes(label=PercentOfIntl))
+int <- transform(int,Region=reorder(Region,-PercentOfIntl))
+int$PercentOfIntl <- int$PercentOfIntl*100
+ggplot(int,aes(x=Region,y=PercentOfIntl))+geom_bar(stat="identity",fill="dark blue")+ geom_text(aes(label=PercentOfIntl),vjust=-0.4)+ ylab("Porcentaje de Estudiantes")+theme(axis.title.x=element_blank(),axis.text.x=element_text(angle = 45,hjust = 1))
+library(ggmap)
+#int <- read.csv("intlall.csv",stringsAsFactors = F)
+int <- intlall
+head(int)
+int[is.na(int)] <- 0
+head(int)
+world <- map_data("world")
+str(world)
+world <- merge(world,int,by.x = "region",by.y = "Citizenship")
+str(world)
+ggplot(world,aes(x=long,y=lat,group=group))+geom_polygon(fill="white",color="orange")+coord_map("mercator")
+world <- world[order(world$group,world$order),]
+ggplot(world,aes(x=long,y=lat,group=group))+geom_polygon(fill="white",color="orange")+coord_map("mercator")
+table(int$Citizenship)
+int$Citizenship[int$Citizenship=="China (People's Republic Of)"]="China"
+table(int$Citizenship)
+table(world$region)
+world <- merge(world,int,by.x = "region",by.y = "Citizenship")
+world <- world[order(world$group,world$order),]
+ggplot(world,aes(x=long,y=lat,group=group))+geom_polygon(fill="white",color="blue")+coord_map("mercator")
+ggplot(world,aes(x=long,y=lat,group=group))+geom_polygon(fill="white",color="black")+coord_map("ortho",orientation = c(0,-50,0))
