@@ -1,0 +1,23 @@
+edg <- edges
+use <- users
+str(edg)
+mean(colSums(table(edg)))
+table(use$school,use$gender)
+library(igraph)
+?graph.data.frame
+g <- graph.data.frame(edg,F,use)
+plot(g,vertex.size=5,vertex.label=NA)
+table(degree(g)>=10)
+V(g)$color="black"
+V(g)$color[V(g)$gender=="A"]="red"
+V(g)$color[V(g)$gender=="B"]="gray"
+plot(g, vertex.label=NA)
+V(g)$color="black"
+V(g)$color[V(g)$school=="A"]="blue"
+V(g)$color[V(g)$school=="AB"]="green"
+plot(g, vertex.label=NA)
+V(g)$color="black"
+V(g)$color[V(g)$locale=="A"]="SkyBlue2"
+V(g)$color[V(g)$locale=="B"]="green"
+plot(g, vertex.label=NA)
+?igraph.plotting
